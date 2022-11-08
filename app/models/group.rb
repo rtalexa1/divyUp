@@ -13,4 +13,12 @@ class Group < ApplicationRecord
     through: :receipts,
     source: :user
 
+  def total
+    self.receipts.sum("total")
+  end
+
+  def divy
+    total / self.members.length
+  end
+
 end
