@@ -1,8 +1,8 @@
 <h1>Receipts</h1>
 
 <% @receipts.each do |receipt| %>
-  <label for="receipt"><%= receipt.group.name %></label>
-  <ul id="receipt">
+  <%= link_to 'View receipt', user_receipt_url(id: receipt.id, user_id: @user.id) %>
+  <ul>
     <label for="name">Name</label>
     <li id="name"><%= receipt.name %></li>
     <label for="date">Date</label>

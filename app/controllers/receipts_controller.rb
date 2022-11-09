@@ -2,7 +2,18 @@ class ReceiptsController < ApplicationController
 
   def index
     @receipts = Receipt.where(user_id: current_user.id)
+    @user = current_user
     render :index
+  end
+
+  def show
+    @receipt = Receipt.find_by(id: params[:id])
+
+    if @receipt
+      render :show
+    else
+      redirect_to user_receipts_url
+    end
   end
 
   def new

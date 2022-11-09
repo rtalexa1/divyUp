@@ -1,8 +1,20 @@
 class GroupsController < ApplicationController
 
   def index
-    @groups = Group.where()
+    @groups = Group.where(user_id: current_user.id)
+    @user = current_user
     render :index
+  end
+
+  def show
+    @group = Group.find_by(id: params[:id])
+    @user = current_user
+    
+    if @group
+      render :show
+    else
+      redirect_to user_groups_url
+    end
   end
   
   def new

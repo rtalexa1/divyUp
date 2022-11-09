@@ -8,6 +8,7 @@ class User < ApplicationRecord
     foreign_key: :user_id,
     primary_key: :id
   has_many :receipts
-  has_many :groups, through: :receipts
+  has_many :memberships
+  has_many :groups, through: :memberships
 
 end

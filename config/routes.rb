@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :users, only: [:new, :create] do
-    resources :groups, only: :index
-    resources :receipts, only: :index
+    resources :groups, only: [:index, :show]
+    resources :receipts, only: [:index, :show]
   end
 
   resources :receipts
