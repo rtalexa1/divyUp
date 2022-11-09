@@ -1,5 +1,10 @@
 class GroupsController < ApplicationController
 
+  def index
+    @groups = Group.where()
+    render :index
+  end
+  
   def new
     render :new
   end

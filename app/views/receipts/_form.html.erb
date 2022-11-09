@@ -10,27 +10,45 @@
   <% end %>
   <%# Need to add the authenticity token here %>
 
-  <label for="name">Enter a name for your transaction (e.g. "Dinner at Wendy's"; "August rent")</label>
+  <label for="name">
+    <%= action == :edit ? "Edit name" : 'Enter a name for your transaction (e.g. "Dinner at Wendy\'s"; "August rent")'%>
+  </label>
   <input 
-    id="name" name="receipt[name]" type="text" value="<%= receipt.name ? receipt.name : "Name" %>">
+    id="name" 
+    name="receipt[name]" 
+    type="text" 
+    value="<%= receipt.name ? receipt.name : "Name" %>"
+  >
 
-  <label for="date">Enter a date (optional)</label>
+  <label for="date">
+    <%= action == :edit ? 'Edit date' : 'Enter a date (optional)' %>
+  </label>
   <input id="date" name="receipt[date]" type="date">
 
-  <label for="group">Which group does this receipt belong to?</label>
-  <select name="receipt[group]" id="group">
-    <option disabled <%= receipt.group ? "" : "selected" %>>Select group</option>
+  <label for="group">
+    <%= action == :edit ? 'Edit group' : 'Which group does this receipt belong to?' %>
+  </label>
+  <select name="receipt[group_id]" id="group">
+    <option disabled <%= receipt.group_id ? "" : "selected" %>>Select group</option>
     <% user.groups.each do |group| %>
-      <option value=<%= group.name %>><%= group.name %></option>
+      <option value=<%= group.id %>><%= group.name %></option>
     <% end %>
   </select>
   <%= link_to 'Create a new group', new_group_url %>
 
-  <label for="total">What is the total amount of the receipt?</label>
+  <label for="total">
+    <%= action == :edit ? 'Edit total' : 'What is the total amount of the receipt?'%>
+  </label>
   <input id="total" name="receipt[total]" type="number" value="<%= receipt.total %>">
 
   <%# Option to upload a picture of the receipt %>
 
   <label for="note">
+    <%= action == :edit ? 'Edit note' : 'Write a note about this receipt (optional)'%>
+  </label>
+  <textarea id="note" name="receipt[note]" rows="4" cols="50">
+    <%= receipt.note %>
+  </textarea>
 
+  <input type="submit" value="<%= action == :edit ? 'Update receipt' : 'Add receipt'%>">
 </form>

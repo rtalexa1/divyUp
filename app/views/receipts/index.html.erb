@@ -1,0 +1,16 @@
+<h1>Receipts</h1>
+
+<% @receipts.each do |receipt| %>
+  <label for="receipt"><%= receipt.group.name %></label>
+  <ul id="receipt">
+    <label for="name">Name</label>
+    <li id="name"><%= receipt.name %></li>
+    <label for="date">Date</label>
+    <li id="date"><%= receipt.date %></li>
+    <label for="total">Total</label>
+    <li id="total"><%= receipt.total %></li>
+    <label for="note">Note</label>
+    <li id="note"><%= receipt.note%></li>
+  </ul>
+  <br>
+<% end %>

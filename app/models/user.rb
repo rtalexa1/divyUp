@@ -9,6 +9,5 @@ class User < ApplicationRecord
     primary_key: :id
   has_many :receipts
   has_many :groups, through: :receipts
-  belongs_to :group
 
 end
