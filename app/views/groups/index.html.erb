@@ -1,5 +1,12 @@
 <h1>Groups</h1>
 
-<% @groups.each do |group| %>
-  <%= link_to group.name, user_group_url(id: group.id, user_id: @user.id) %>
+<%# Need to get this page working %>
+
+<% if !@groups.nil? %>
+  <% @groups.each do |group| %>
+    <%= link_to group.name, user_group_url(id: group.id, user_id: @user.id) %>
+  <% end %>
+<% else %>
+  <p>You are not a member of any groups yet.</p>
+  <%= link_to 'Create a group', new_group_url %>
 <% end %>

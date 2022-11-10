@@ -9,7 +9,7 @@
     type="hidden"
     name="authenticity_token"
     value="<%= form_authenticity_token %>">
-    
+
   <% if action == :edit %>
     <input type="hidden" name="_method" value="patch">
   <% end %>
@@ -34,7 +34,7 @@
   </label>
   <select name="receipt[group_id]" id="group">
     <option disabled <%= receipt.group_id ? "" : "selected" %>>Select group</option>
-    <% user.groups.each do |group| %>
+    <% current_user.groups.each do |group| %>
       <option value=<%= group.id %>><%= group.name %></option>
     <% end %>
   </select>

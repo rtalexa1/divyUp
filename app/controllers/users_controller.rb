@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
     if user.save
       login_user!(user)
-      redirect_to user_groups_url
+      redirect_to user_groups_url(user)
     else
       # flash error here
       render :new

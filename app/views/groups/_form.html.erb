@@ -1,0 +1,30 @@
+<% if action == :edit %>
+  <% action_url = group_url(group) %>
+<% else %>
+  <% action_url = groups_url %>
+<% end %>
+
+<form action="<%= action_url %>" method="post">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
+  <% if action == :edit %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+
+  <label for="name">
+    <%= action == :edit ? "Edit name" : 'Give your group a name'%>
+  </label>
+  <input 
+    id="name" 
+    name="group[name]" 
+    type="text" 
+    value="<%= group.name ? group.name : "Name" %>"
+  >
+
+  <%# Need to add a way to add other users (including friends) to the group at this stage %>
+
+  <input type="submit" value="<%= action == :edit ? 'Update group' : 'Create group'%>">
+</form>

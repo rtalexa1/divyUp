@@ -18,7 +18,6 @@ class ReceiptsController < ApplicationController
 
   def new
     @receipt = Receipt.new
-    @user = current_user
     render :new
   end
 
