@@ -1,8 +1,6 @@
 <h1>Groups</h1>
 
-<%# Need to get this page working %>
-
-<% if !@groups.nil? %>
+<% if !@groups.empty? %>
   <% @groups.each do |group| %>
     <%= link_to group.name, user_group_url(id: group.id, user_id: @user.id) %>
   <% end %>

@@ -11,6 +11,24 @@
   </head>
 
   <body>
+    <nav class="main-nav">
+      <div>
+        <% if current_user.nil? %>
+          <a href="<%=new_session_url%>">Login</a><br>
+          <a href="<%=new_user_url%>">Create an account</a>
+        <% else %>
+          <%= current_user.email %>
+          <form action="<%= session_url %>" method="post">
+            <input 
+              type="hidden" 
+              name="authenticity_token"
+              value="<%= form_authenticity_token %>">
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" value="Logout">
+          </form>
+        <% end %>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>
