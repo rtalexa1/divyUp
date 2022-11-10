@@ -5,10 +5,14 @@
 <% end %>
 
 <form action="<%= action_url %>" method="post">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+    
   <% if action == :edit %>
     <input type="hidden" name="_method" value="patch">
   <% end %>
-  <%# Need to add the authenticity token here %>
 
   <label for="name">
     <%= action == :edit ? "Edit name" : 'Enter a name for your transaction (e.g. "Dinner at Wendy\'s"; "August rent")'%>
