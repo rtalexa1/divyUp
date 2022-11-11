@@ -3,3 +3,5 @@
 <% @group.receipts.each do |receipt| %>
   <%= link_to receipt.name, user_receipt_url(id: receipt.id, user_id: @user.id) %>
 <% end %>
+
+<%= link_to 'Add a new receipt to this group', new_receipt_url %>

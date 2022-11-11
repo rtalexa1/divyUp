@@ -1,6 +1,7 @@
 class ReceiptsController < ApplicationController
 
-    load_and_authorize_resource
+  load_and_authorize_resource :user
+  load_and_authorize_resource :receipt, :through => :user
 
   def index
     @receipts = Receipt.where(user_id: current_user.id)

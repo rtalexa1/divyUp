@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
 
-    load_and_authorize_resource
+  load_and_authorize_resource :user
+  load_and_authorize_resource :group, :through => :user
 
   def index
     redirect_to new_session_url unless current_user
@@ -28,8 +29,9 @@ class GroupsController < ApplicationController
   def create
     group = Group.new(group_params)
     group.user_id = current_user.id
+
     if group.save
-      redirect_to user_groups_url
+      redirect_to user_groups_url(current_user)
     else
       render :new
     end
