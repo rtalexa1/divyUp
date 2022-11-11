@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :receipts
   has_many :memberships
   has_many :groups, through: :memberships
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships, source: :user
 
   after_initialize :ensure_session_token
 
@@ -40,6 +42,11 @@ class User < ApplicationRecord
   def is_password?(password)
     BCrypt::Password.new(self.password_digest).is_password?(password)
   end
+
+  # def friends
+  #   friendships = Friendship.where(friend_id: self.id)
+  #   friendships.map { |friendship| User.find_by(id: friendship.user_id) }
+  # end
 
   private
   def ensure_session_token
