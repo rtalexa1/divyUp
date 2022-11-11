@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  
+
   helper_method :current_user
 
   private
@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     session[:session_token] = user.reset_session_token!
   end  
 
-  def logout_user!(user)
+  def logout_user!
     current_user.reset_session_token!
     session[:session_token] = nil
   end

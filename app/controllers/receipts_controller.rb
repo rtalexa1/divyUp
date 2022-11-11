@@ -1,5 +1,7 @@
 class ReceiptsController < ApplicationController
 
+    load_and_authorize_resource
+
   def index
     @receipts = Receipt.where(user_id: current_user.id)
     @user = current_user
