@@ -6,7 +6,7 @@ class Friendship < ApplicationRecord
  
   after_create do |f|
     if !Friendship.find_by(friend_id: f.user_id)
-      Friendship.create!(user_id: f.friend_id, friend_id: f.user_id)
+      Friendship.create!(user_id: f.friend_id, friend_id: f.user_id, requester: false)
     end
   end
 
@@ -16,7 +16,7 @@ class Friendship < ApplicationRecord
   end
 
   def creator
-    
+
   end
 
 end

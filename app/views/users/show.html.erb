@@ -13,7 +13,7 @@
 <h3>Requests you sent</h3>
 <ul>
   <% @sent_friend_requests.each do |friend_request| %>
-    <% friend = User.find_by(id: friendship.user_id) %>
+    <% friend = User.find_by(id: friend_request.friend_id) %>
     <li>
       <%= friend.name %> <%= link_to "(Profile)", user_url(friend) %>
     </li>
@@ -21,13 +21,12 @@
 </ul>
 
 <h3>Requests you received</h3>
+
 <ul>
-  <% current_user.friendships.each do |friendship| %>
-    <% if friendship.user_id == current_user.id && !friendship.accepted %>
-      <% friend = User.find_by(id: friendship.user_id) %>
-      <li>
-        <%= friend.name %> <%= link_to "(Profile)", user_url(friend) %>
-      </li>
-    <% end %>
+<% @received_friend_requests.each do |friend_request| %>
+    <% friend = User.find_by(id: friend_request.user_id) %>
+    <li>
+      <%= friend.name %> <%= link_to "(Profile)", user_url(friend) %>
+    </li>
   <% end %>
 </ul>
