@@ -1,16 +1,20 @@
 <h1>Add friend</h1>
 
 <%# Make form tags and figure out how to do a search %>
-<form action="<%= new_user_friend_request_url %>" method="get">
+<form action="<%= new_user_friendship_url %>" method="get">
   <label for="name_search">Search by name</label>
   <input type="search" name="search" id="name_search">
   <input type="submit" value="Search">
 </form>
 
+<%# Include a link to the side of each search result to send a friend request %>
+<%# How to redirect after that action? %>
+
 <ul>
   <% if @potential_friends %>
     <% @potential_friends.each do |pf| %>
       <li><%= pf.name %></li>
+      <%= button_to "Send friend request", { action: "create", friend_id: pf.id} %>
     <% end %>
   <% end %>
 </ul>

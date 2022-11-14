@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
 
   def show
+    @sent_friend_requests = Friendship.where("user_id = ? AND accepted = false", current_user.id)
+    @received_friend_requests = Friendship.where("friend_id = ? AND accepted = false", current_user.id)
     render :show
   end
 

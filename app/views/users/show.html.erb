@@ -12,21 +12,21 @@
 <h2>Friend Requests</h2>
 <h3>Requests you sent</h3>
 <ul>
-  <% current_user.friend_requests.each do |fr| %>
-    <% if fr.requester_id == current_user.id %>
-      <% requestee = User.find_by(id: fr.requestee_id) %>
-      <li><%= requestee.name %> <%= link_to "(Profile)", user_url(requestee) %></li>
-    <% end %>
+  <% @sent_friend_requests.each do |friend_request| %>
+    <% friend = User.find_by(id: friendship.user_id) %>
+    <li>
+      <%= friend.name %> <%= link_to "(Profile)", user_url(friend) %>
+    </li>
   <% end %>
 </ul>
 
 <h3>Requests you received</h3>
 <ul>
-  <% current_user.friend_requests.each do |fr| %>
-    <% if fr.requestee_id == current_user.id %>
-      <% requester = User.find_by(id: fr.requester_id) %>
+  <% current_user.friendships.each do |friendship| %>
+    <% if friendship.user_id == current_user.id && !friendship.accepted %>
+      <% friend = User.find_by(id: friendship.user_id) %>
       <li>
-        <%= requester.name %> <%= link_to "(Profile)", user_url(requester) %>
+        <%= friend.name %> <%= link_to "(Profile)", user_url(friend) %>
       </li>
     <% end %>
   <% end %>

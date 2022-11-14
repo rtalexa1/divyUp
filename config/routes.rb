@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :new, :create] do
     resources :groups, only: [:index, :show]
     resources :receipts, only: [:index, :show]
-    resources :friend_requests, only: [:new, :create]
+    resources :friendships, only: [:new, :create]
   end
   resources :receipts
   resources :groups

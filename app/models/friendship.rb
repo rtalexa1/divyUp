@@ -15,4 +15,8 @@ class Friendship < ApplicationRecord
     reciprocal.destroy unless reciprocal.nil?
   end
 
+  def creator
+    
+  end
+
 end
