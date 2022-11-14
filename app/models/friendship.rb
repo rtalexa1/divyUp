@@ -1,5 +1,7 @@
 class Friendship < ApplicationRecord
 
+  validates :user_id, :friend_id, presence: true
+
   belongs_to :user, foreign_key: :friend_id
  
   after_create do |f|
