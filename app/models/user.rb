@@ -21,10 +21,6 @@ class User < ApplicationRecord
   has_many :friends, 
     through: :friendships, 
       source: :user
-  has_many :friend_requests,
-    class_name: "FriendRequest",
-    foreign_key: :requester_id,
-    primary_key: :id
 
   after_initialize :ensure_session_token
 

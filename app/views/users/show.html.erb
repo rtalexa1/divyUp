@@ -10,7 +10,7 @@
 
 <%# This section should only be visible on a user's own show page %>
 <h2>Friend Requests</h2>
-<h3>Sent requests</h3>
+<h3>Requests you sent</h3>
 <ul>
   <% current_user.friend_requests.each do |fr| %>
     <% if fr.requester_id == current_user.id %>
@@ -20,12 +20,14 @@
   <% end %>
 </ul>
 
-<h3>Your requests</h3>
+<h3>Requests you received</h3>
 <ul>
   <% current_user.friend_requests.each do |fr| %>
     <% if fr.requestee_id == current_user.id %>
       <% requester = User.find_by(id: fr.requester_id) %>
-      <li><%= requester.name %> <%= link_to "(Profile)", user_url(requester) %></li>
+      <li>
+        <%= requester.name %> <%= link_to "(Profile)", user_url(requester) %>
+      </li>
     <% end %>
   <% end %>
 </ul>
