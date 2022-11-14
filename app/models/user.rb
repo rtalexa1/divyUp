@@ -9,12 +9,22 @@ class User < ApplicationRecord
   has_many :created_groups,
     class_name: "Group",
     foreign_key: :user_id,
-    primary_key: :id
-  has_many :receipts
+    primary_key: :id,
+    dependent: :destroy
+  has_many :receipts, 
+    dependent: :destroy
   has_many :memberships
-  has_many :groups, through: :memberships
-  has_many :friendships, dependent: :destroy
-  has_many :friends, through: :friendships, source: :user
+  has_many :groups, 
+    through: :memberships
+  has_many :friendships, 
+    dependent: :destroy
+  has_many :friends, 
+    through: :friendships, 
+      source: :user
+  has_many :friend_requests,
+    class_name: "FriendRequest",
+    foreign_key: :requester_id,
+    primary_key: :id
 
   after_initialize :ensure_session_token
 
@@ -43,10 +53,9 @@ class User < ApplicationRecord
     BCrypt::Password.new(self.password_digest).is_password?(password)
   end
 
-  # def friends
-  #   friendships = Friendship.where(friend_id: self.id)
-  #   friendships.map { |friendship| User.find_by(id: friendship.user_id) }
-  # end
+  def friend_requests
+    FriendRequest.where("requester_id = ? OR requestee_id = ?", self.id, self.id)
+  end
 
   private
   def ensure_session_token
