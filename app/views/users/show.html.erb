@@ -8,11 +8,12 @@
 <%# Display friends list %>
 <%# Link to send a friend request %>
 
+<%# This section should only be visible on a user's own show page %>
 <h2>Friend Requests</h2>
 <h3>Sent requests</h3>
 <ul>
-  <% @user.friend_requests.each do |fr| %>
-    <% if fr.requester_id == @user.id %>
+  <% current_user.friend_requests.each do |fr| %>
+    <% if fr.requester_id == current_user.id %>
       <% requestee = User.find_by(id: fr.requestee_id) %>
       <li><%= requestee.name %> <%= link_to "(Profile)", user_url(requestee) %></li>
     <% end %>
@@ -21,8 +22,8 @@
 
 <h3>Your requests</h3>
 <ul>
-  <% @user.friend_requests.each do |fr| %>
-    <% if fr.requestee_id == @user.id %>
+  <% current_user.friend_requests.each do |fr| %>
+    <% if fr.requestee_id == current_user.id %>
       <% requester = User.find_by(id: fr.requester_id) %>
       <li><%= requester.name %> <%= link_to "(Profile)", user_url(requester) %></li>
     <% end %>

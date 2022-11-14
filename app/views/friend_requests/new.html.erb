@@ -1,8 +1,21 @@
 <h1>Add friend</h1>
 
 <%# Make form tags and figure out how to do a search %>
-<label for="name_search">Search by name</label>
-<input type="search" name="name" id="name_search">
-<input type="submit" value="Search">
+<form action="<%= new_user_friend_request_url %>" method="get">
+  <label for="name_search">Search by name</label>
+  <input type="search" name="search" id="name_search">
+  <input type="submit" value="Search">
+</form>
+
+<ul>
+  <% if @potential_friends %>
+    <% @potential_friends.each do |pf| %>
+      <li><%= pf.name %></li>
+    <% end %>
+  <% end %>
+</ul>
 
 <%# List out other users that the current user can send friend requests to %>
+<%# We don't want to just list ever user on the site, so we could do "You may know..." %>
+<%# Search through user's friends, list their friends' friends %>
+

@@ -1,12 +1,9 @@
 class FriendRequestsController < ApplicationController
 
-  def index
-    @user = current_user
-    render :index
-  end
-
   def new
-
+    @user = current_user
+    @potential_friends = User.search(params[:search])
+    render :new
   end
 
   def create
@@ -15,6 +12,6 @@ class FriendRequestsController < ApplicationController
 
   private
   def friend_request_params
-    params.require(:friend_request).permit(:requester_id, :requestee_id, :accepted)
+    params.require(:friend_request).permit(:requester_id, :requestee_id, :accepted, :search)
   end
 end
