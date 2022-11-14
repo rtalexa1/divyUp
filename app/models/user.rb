@@ -58,6 +58,18 @@ class User < ApplicationRecord
     nil
   end
 
+  def sent_friend_requests
+    Friendship.where(
+      "user_id = ? AND accepted = false AND requester = true", 
+      self.id)
+  end
+
+  def received_friend_requests
+    Friendship.where(
+      "friend_id = ? AND accepted = false AND requester = true", 
+      self.id)
+  end
+
   private
   def ensure_session_token
     self.session_token ||= set_session_token

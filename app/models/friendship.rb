@@ -15,8 +15,11 @@ class Friendship < ApplicationRecord
     reciprocal.destroy unless reciprocal.nil?
   end
 
-  def creator
-
+  def accept
+    
   end
 
+  def inverse
+    Friendship.where("user_id = ? AND friend_id = ?", self.friend_id, self.user_id)
+  end
 end
