@@ -18,6 +18,6 @@ class ApplicationController < ActionController::Base
   end
 
   def require_no_user!
-    redirect_to user_groups_url if current_user
+    redirect_to user_url(current_user) if current_user
   end
 end

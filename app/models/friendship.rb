@@ -4,15 +4,14 @@ class Friendship < ApplicationRecord
 
   belongs_to :user, foreign_key: :friend_id
  
-  after_create do |f|
-    if !Friendship.find_by(friend_id: f.user_id)
-      Friendship.create!(user_id: f.friend_id, friend_id: f.user_id, requester: false)
+  after_save do |f|
+    if !Friendship.where("friend_id = ? AND user_id = ?", f.user_id, f.friend_id)
+      Friendship.create(user_id: f.friend_id, friend_id: f.user_id, requester: false)
     end
   end
 
   after_destroy do |f|
-    reciprocal = Friendship.find_by(friend_id: f.user_id)
-    reciprocal.destroy unless reciprocal.nil?
+    inverse.destroy unless inverse.nil?
   end
 
   def accept!
@@ -20,6 +19,7 @@ class Friendship < ApplicationRecord
     self.inverse.update(accepted: true)
   end
 
+  private
   def inverse
     Friendship.where("user_id = ? AND friend_id = ?", self.friend_id, self.user_id)
   end

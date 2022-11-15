@@ -10,6 +10,11 @@ class FriendshipsController < ApplicationController
     friendship = Friendship.new(friend_id: params[:friend_id])
     friendship.user_id = current_user.id
     if friendship.save
+      Friendship.create(
+        user_id: params[:friend_id], 
+        friend_id: current_user.id, 
+        requester: false
+        )
       redirect_to user_url(current_user)
     else
       render :new
