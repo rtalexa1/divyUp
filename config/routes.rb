@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :receipts
   resources :groups
   resource :session, only: [:new, :create, :destroy]
+  resources :friendships, only: :update
 end

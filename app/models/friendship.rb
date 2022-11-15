@@ -15,8 +15,9 @@ class Friendship < ApplicationRecord
     reciprocal.destroy unless reciprocal.nil?
   end
 
-  def accept
-    
+  def accept!
+    self.update(accepted: true)
+    self.inverse.update(accepted: true)
   end
 
   def inverse

@@ -16,6 +16,16 @@ class FriendshipsController < ApplicationController
     end
   end
 
+  def update
+    friendship = Friendship.find_by(id: params[:id])
+    friendship.accept!
+    redirect_to user_url(current_user)
+  end
+
+  def destroy
+    
+  end
+
   private
   def friendship_params
     params.require(:friendship).permit(:user_id, :friend_id, :accepted, :search)

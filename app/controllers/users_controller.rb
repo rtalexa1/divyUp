@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   def show
+    @user = User.find_by(id: params[:id])
     @sent_friend_requests = current_user.sent_friend_requests
     @received_friend_requests = current_user.received_friend_requests
     render :show

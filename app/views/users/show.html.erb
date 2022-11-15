@@ -1,12 +1,32 @@
-<h1>Profile</h1>
+<h1><%= @user.name %></h1>
+
+<%# Add a button that will only display on pages NOT belonging to the user to add that user as a friend %>
 
 <h2>Groups</h2>
+<ul>
+  <% @user.groups.each do |group| %>
+    <li>
+      <%= link_to "#{group.name}", group_url(group) %>
+    </li>
+  <% end %>
+</ul>
 <%# Could display first three groups, then offer a button to link to the groups index page (if user has more than three groups) %>
 <%# Links to join or create groups %>
 
 <h2>Friends</h2>
-<%# Display friends list %>
-<%# Link to send a friend request %>
+<ul>
+  <% @user.friends.each do |friend| %>
+    <% friendship = Friendship.find_by(friend_id: friend.id)%>
+    <% if friendship.accepted %>
+      <li>
+        <%= link_to "#{friend.name}", user_url(friend) %>
+      </li>
+    <% end %>
+    <%# button to remove friend (should ask if they're sure first) %>
+  <% end %>
+</ul>
+<%# This link should only be visible on a user's own show page %>
+<%= link_to 'Add a friend', new_user_friendship_url(@user) %>
 
 <%# This section should only be visible on a user's own show page %>
 <h2>Friend Requests</h2>
@@ -15,8 +35,9 @@
   <% @sent_friend_requests.each do |friend_request| %>
     <% friend = User.find_by(id: friend_request.friend_id) %>
     <li>
-      <%= friend.name %> <%= link_to "(Profile)", user_url(friend) %>
+      <%= link_to "#{friend.name}", user_url(friend) %>
     </li>
+    <%# button to withdraw a friend request that hasn't been accepted yet %>
   <% end %>
 </ul>
 
@@ -28,5 +49,11 @@
     <li>
       <%= friend.name %> <%= link_to "(Profile)", user_url(friend) %>
     </li>
+    <form method='post' action="<%= friendship_url(friend_request) %>">
+      <div>
+        <input name='_method' value='patch' type='hidden'/>
+        <input value='Accept' type='submit'/>
+      </div>
+    </form>
   <% end %>
 </ul>
