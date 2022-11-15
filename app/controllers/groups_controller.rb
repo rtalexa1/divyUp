@@ -1,11 +1,12 @@
 class GroupsController < ApplicationController
 
+  load_and_authorize_resource :group
   load_and_authorize_resource :user
   load_and_authorize_resource :group, :through => :user
 
   def index
     redirect_to new_session_url unless current_user
-    @groups = Group.where(user_id: current_user.id)
+    @groups = current_user.groups
     @user = current_user
     render :index
   end

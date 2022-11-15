@@ -1,7 +1,8 @@
 <h1><%= @group.name %></h1>
+<%= link_to 'Back', user_group_url(@user) %>
 
 <% @group.receipts.each do |receipt| %>
   <%= link_to receipt.name, user_receipt_url(id: receipt.id, user_id: @user.id) %>
 <% end %>
 
-<%= link_to 'Add a new receipt to this group', new_receipt_url %>
+<%= link_to 'Add a new receipt to this group', new_user_receipt_url(@user) %>

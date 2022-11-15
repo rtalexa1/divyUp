@@ -3,11 +3,12 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :new, :create] do
     resources :groups, only: [:index, :show]
-    resources :receipts, only: [:index, :show]
+    resources :receipts
     resources :friendships, only: [:new, :create]
   end
-  resources :receipts
-  resources :groups
+  resources :groups do
+    resources :receipts
+  end
   resource :session, only: [:new, :create, :destroy]
   resources :friendships, only: :update
 end

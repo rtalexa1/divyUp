@@ -1,7 +1,7 @@
 <% if action == :edit %>
-  <% action_url = receipt_url(receipt) %>
+  <% action_url = user_receipt_url(current_user) %>
 <% else %>
-  <% action_url = receipts_url %>
+  <% action_url = user_receipts_url(current_user) %>
 <% end %>
 
 <form action="<%= action_url %>" method="post">

@@ -1,4 +1,7 @@
 <h1>Groups</h1>
+<%= link_to 'Back', user_url(@user) %>
+
+<br>
 
 <% if !@groups.empty? %>
   <% @groups.each do |group| %>
@@ -6,5 +9,6 @@
   <% end %>
 <% else %>
   <p>You are not a member of any groups yet.</p>
-  <%= link_to 'Create a group', new_group_url %>
 <% end %>
+<br><br>
+<%= link_to "Create a group", new_group_url %>
