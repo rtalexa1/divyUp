@@ -1,5 +1,6 @@
 class ReceiptsController < ApplicationController
 
+  load_and_authorize_resource :receipt
   load_and_authorize_resource :user
   load_and_authorize_resource :receipt, :through => :user
 

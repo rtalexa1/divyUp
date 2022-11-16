@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   root "sessions#new"
 
   resources :users, only: [:show, :new, :create] do
-    resources :groups, only: [:index, :show]
     resources :receipts
     resources :friendships, only: [:new, :create]
   end
