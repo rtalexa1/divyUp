@@ -11,6 +11,8 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find_by(id: params[:id])
     @user = current_user
+    @members = @group.members
+    @percentage = # what should go here? ||= @group.even_split_percentage
     
     if @group
       render :show
@@ -49,6 +51,6 @@ class GroupsController < ApplicationController
 
   private
   def group_params
-    params.require(:group).permit(:name, :user_id, :settled)
+    params.require(:group).permit(:name, :user_id, :settled, :custom_percentages)
   end
 end

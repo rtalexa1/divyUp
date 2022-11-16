@@ -5,10 +5,30 @@
 <br>
 
 <% @group.receipts.each do |receipt| %>
+  <%= receipt.total %>
   <%= link_to receipt.name, group_receipt_url(id: receipt.id, group_id: @group.id) %>
   <br>
 <% end %>
 
 <br>
+
+<p>Trip running total: <%= @group.total %></p>
+<p>Group members: <%= @group.members.count %></p>
+<p>Cost per member (default: even split):
+<p>You may change the percentage splits as you would like and click the button below to recalculate.</p> 
+<form action="<%= group_url(@group) %>" method="get">
+  <ul>
+    <% @members.each do |member| %>
+      <% i = 0 %>
+      <li>
+        <input type="number" name="group[custom_percentage_<%= member.id %>]" value="<%= @percentage %>">
+        <%= member.name %>
+        Total: <%= @group.even_divy %>
+      </li>
+      <% i += 1 %>
+    <% end %>
+  </ul>
+  <input type="submit" value="Recalculate">
+</form>
 
 <%= link_to 'Add a new receipt to this group', new_user_receipt_url(@user) %>

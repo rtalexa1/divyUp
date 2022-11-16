@@ -18,8 +18,12 @@ class Group < ApplicationRecord
     self.receipts.sum("total")
   end
 
-  def divy
-    total / self.members.length
+  def even_divy
+    (total.to_f / self.members.length).round(2)
+  end
+
+  def even_split_percentage
+    (100 / self.members.length.to_f).round(2)
   end
 
 end
