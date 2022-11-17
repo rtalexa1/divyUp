@@ -14,18 +14,19 @@
 
 <p>Trip running total: <%= @group.total %></p>
 <p>Group members: <%= @group.members.count %></p>
-<p>Cost per member (default: even split):
-<p>You may change the percentage splits as you would like and click the button below to recalculate.</p> 
+<p>Cost per member:</p>
+<p>You may change the percentage splits as you would like and click the button below to recalculate</p> 
 <form action="<%= group_url(@group) %>" method="get">
   <ul>
     <% @members.each do |member| %>
-      <% i = 0 %>
       <li>
-        <input type="number" name="group[custom_percentage_<%= member.id %>]" value="<%= @percentage %>">
+        <input 
+          type="number" 
+          name="group[custom_percentages][<%= member.id %>]" 
+          value="<%= percentage %>">
         <%= member.name %>
-        Total: <%= @group.even_divy %>
+        Total: 
       </li>
-      <% i += 1 %>
     <% end %>
   </ul>
   <input type="submit" value="Recalculate">

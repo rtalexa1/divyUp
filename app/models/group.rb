@@ -18,8 +18,14 @@ class Group < ApplicationRecord
     self.receipts.sum("total")
   end
 
-  def even_divy
-    (total.to_f / self.members.length).round(2)
+  # returns a hash with keys representing the input percentages and the values representing the corresponding $ amount
+  def self.divy(percentages, total)
+    float_total = total.to_f
+    individual_totals = {}
+    percentages.each do |percentage|
+      individual_totals[percentage] = (float_total * (percentage * 0.01)).round(2)
+    end
+    individual_totals
   end
 
   def even_split_percentage

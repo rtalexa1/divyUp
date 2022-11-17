@@ -12,8 +12,15 @@ class GroupsController < ApplicationController
     @group = Group.find_by(id: params[:id])
     @user = current_user
     @members = @group.members
-    @percentage = # what should go here? ||= @group.even_split_percentage
-    
+    # Clean up the view - as little logic as possible there
+    # Where do we store this logic? Model? Service? Procedure? Here?
+    @default_percentage = @group.even_split_percentage
+    @custom_percentages = if group_params.blank? 
+      {}
+    else
+      group_params[:custom_percentages].to_h
+    end
+  
     if @group
       render :show
     else
@@ -51,6 +58,7 @@ class GroupsController < ApplicationController
 
   private
   def group_params
-    params.require(:group).permit(:name, :user_id, :settled, :custom_percentages)
+    return unless params[:group].present?
+    params.require(:group).permit(:name, :user_id, :settled, :custom_percentages => {})
   end
 end
