@@ -15,10 +15,10 @@ class GroupsController < ApplicationController
     # Clean up the view - as little logic as possible there
     # Where do we store this logic? Model? Service? Procedure? Here?
     @default_percentage = @group.even_split_percentage
-    @custom_percentages = if group_params.blank? 
-      {}
+    @individual_totals = if group_params.present? 
+      Group.divy(@group.total, group_params[:custom_percentages].to_h)
     else
-      group_params[:custom_percentages].to_h
+      
     end
   
     if @group
