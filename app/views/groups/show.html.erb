@@ -13,8 +13,13 @@
 <br>
 
 <p>Trip running total: <%= @group.total %></p>
-<p>Group members: <%= @group.members.count %></p>
-<p>Cost per member:</p>
+
+<% flash.each do |type, message| %>
+  <div>
+    <%= message %>
+  </div>
+<% end %>
+
 <p>You may change the percentage splits as you would like and click the button below to recalculate</p> 
 <form action="<%= group_url(@group) %>" method="get">
   <ul>
@@ -22,10 +27,11 @@
       <li>
         <input 
           type="number" 
+          step="any"
           name="group[custom_percentages][<%= member.id %>]" 
-          value="<%= percentage %>">
+          value="<%= @individual_totals[member.id.to_s][0] %>">
         <%= member.name %>
-        Total: 
+        Total: <%= @individual_totals[member.id.to_s][1] %>
       </li>
     <% end %>
   </ul>
