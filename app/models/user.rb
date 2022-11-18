@@ -70,6 +70,15 @@ class User < ApplicationRecord
       self.id)
   end
 
+  def total_for_group(group_id)
+    receipts = Receipt.where("user_id = ? AND group_id = ?", self.id, group_id)
+    receipts.sum("total")
+  end
+
+  def friendships
+    Friendship.where("user_id = ? OR (friend_id = ? AND accepted = true)", self.id, self.id)
+  end
+
   private
   def ensure_session_token
     self.session_token ||= set_session_token

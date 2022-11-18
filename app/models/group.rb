@@ -55,4 +55,21 @@ class Group < ApplicationRecord
     (100 / self.members.length.to_f).round(2)
   end
 
+  def even_split_amount
+    (self.total / self.members.length.to_f).round(2)
+  end
+
+  def calculate_balances
+    balances = {}
+    self.members.each do |member|
+      if member.total_for_group(self.id) == self.even_split_amount
+        balances[member] = "Paid up"
+      elsif member.total_for_group(self.id) > self.even_split_amount
+        balances[member] = "Receives #{(member.total_for_group(self.id) - self.even_split_amount).to_s}"
+      else
+        balances[member] = "Owes #{self.even_split_amount.to_s}"
+      end
+    end
+    balances
+  end
 end
