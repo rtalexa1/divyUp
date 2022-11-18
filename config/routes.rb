@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   end
   resource :session, only: [:new, :create, :destroy]
   resources :friendships, only: :update
+  resources :custom_splits
 end

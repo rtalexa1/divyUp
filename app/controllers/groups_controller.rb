@@ -12,6 +12,7 @@ class GroupsController < ApplicationController
     @group = Group.find_by(id: params[:id])
     @user = current_user
     @members = @group.members
+    @balances = @group.calculate_balances
     # Clean up the view - as little logic as possible there
     # Where do we store this logic? Model? Service? Procedure? Here?
     # @individual_totals = if group_params.present?

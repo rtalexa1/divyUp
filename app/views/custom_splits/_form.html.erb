@@ -1,0 +1,28 @@
+<% if action == :edit %>
+  <% action_url = custom_split_url %>
+<% else %>
+  <% action_url = custom_splits_url %>
+<% end %>
+
+<form action="<%= action_url %>" method="post">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
+  <% if action == :edit %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+
+  <ul>
+    <% @balances.each do |member, balance| %>
+      <li>
+        <%= member.name %>
+        Amount contributed: <%= member.total_for_group(@group.id) %>
+      </li>
+      <label for="percentage">Enter a percentage</label>
+      <input type="number" name="percentage[<%= member.id %>]" id="percentage">
+    <% end %>
+  </ul>
+  <input type="submit" value="<%= action == :edit ? 'Recalculate' : 'Calculate'%>">  
+</form>

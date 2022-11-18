@@ -24,16 +24,15 @@
   </div>
 <% end %>
 
-<form action="<%= group_url(@group) %>" method="get">
-  <ul>
-    <% @members.each do |member| %>
-      <li>
-        <%= member.name %>
-        Amount contributed: <%= member.total_for_group(@group.id) %>
-      </li>
-    <% end %>
-  </ul>
-  <input type="submit" value="Calculate even split">
-</form>
+<ul>
+  <% @balances.each do |member, balance| %>
+    <li>
+      <%= member.name %>
+      Amount contributed: <%= member.total_for_group(@group.id) %>
+      Balance: <%= balance %>
+    </li>
+  <% end %>
+</ul>
 
+<%= button_to "Calculate a custom split", new_custom_split_url, params: {group_id: @group.id}, method: :get%>
 <%= link_to 'Add a new receipt to this group', new_user_receipt_url(@user) %>

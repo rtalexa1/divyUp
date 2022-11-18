@@ -13,6 +13,7 @@ class Group < ApplicationRecord
     class_name: "User",
     through: :memberships,
     source: :user
+  has_many :custom_splits
 
   def total
     self.receipts.sum("total")
