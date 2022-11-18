@@ -21,8 +21,11 @@
         Amount contributed: <%= member.total_for_group(@group.id) %>
       </li>
       <label for="percentage">Enter a percentage</label>
-      <input type="number" name="percentage[<%= member.id %>]" id="percentage">
+      <input type="number" name="percentages[<%= member.id %>]" id="percentage">
     <% end %>
   </ul>
+  <input type="hidden" name="custom_split[group_id]" value="<%= @group.id%>">
+  <input type="hidden" name="custom_split[total]" value="<%= @group.total %>">
+  <input type="hidden" name="custom_split[group_member_count" value="<%= @group.members.length %>">
   <input type="submit" value="<%= action == :edit ? 'Recalculate' : 'Calculate'%>">  
 </form>
