@@ -2,6 +2,11 @@
 
 <% balances = flash[:balances] %>
 
-<% balances.each do |balance| %>
-  <p><%= balance %></p>
+<% balances.each do |id, custom_amount| %>
+  <ul>
+    <% member = User.find_by(id: id.to_i) %>
+    <li><%= member.name %>: <%= custom_amount %></li>
+  </ul>
 <% end %>
+
+<%= button_to "Try a different split", controller: 'custom_splits', action: 'new', method: 'get' %>

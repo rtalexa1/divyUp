@@ -6,7 +6,7 @@ class CustomSplit < ApplicationRecord
   belongs_to :group
 
   # Takes in the total amount of a group and a hash with keys of group members' ids and values of custom percentages
-  # Returns a has with keys of group members' ids and the dollar amount owed
+  # Returns a hash with keys of group members' ids and the dollar amount owed
   def self.calculate_custom_balances(total, percentages)
     custom_balances = {}
     i = 0

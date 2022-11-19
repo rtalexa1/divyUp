@@ -26,9 +26,8 @@ class CustomSplitsController < ApplicationController
       flash[:balances] = @balances
       redirect_to custom_split_url(@custom_split)
     else
-      flash.now[:error] = @custom_split.errors
-      @group = Group.find_by(id: custom_split_params[:group_id].to_i)
-      render :new
+      flash[:message] = @custom_split.errors.full_messages[0]
+      redirect_to controller: 'custom_splits', action: 'new', method: 'get', group_id: @custom_split.group_id
     end
   end
 
