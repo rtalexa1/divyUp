@@ -1,5 +1,7 @@
 <h1>Custom split</h1>
 
-<% @balances.each do |balance| %>
+<% balances = flash[:balances] %>
+
+<% balances.each do |balance| %>
   <p><%= balance %></p>
 <% end %>

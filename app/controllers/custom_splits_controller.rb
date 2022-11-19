@@ -16,15 +16,18 @@ class CustomSplitsController < ApplicationController
 
   def create 
     @custom_split = CustomSplit.new(custom_split_params)
+    @custom_split.percentage_total = params[:percentages].values.map(&:to_i).sum
     @balances = CustomSplit.calculate_custom_balances(
       custom_split_params[:total].to_i, 
       params[:percentages]
-      )
-
-    if custom_split.save
-      redirect_to custom_split_url(@custom_split), balances: @balances
+      ) 
+    
+    if @custom_split.save
+      flash[:balances] = @balances
+      redirect_to custom_split_url(@custom_split)
     else
-      flash[:error] = @custom_split.errors
+      flash.now[:error] = @custom_split.errors
+      @group = Group.find_by(id: custom_split_params[:group_id].to_i)
       render :new
     end
   end

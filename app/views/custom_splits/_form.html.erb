@@ -25,7 +25,8 @@
   <% end %>
 
   <ul>
-    <% balances.each do |member, balance| %>
+    <% balances.each do |member_id, balance| %>
+      <% member = User.find_by(id: member_id) %>
       <li>
         <%= member.name %>
         Amount contributed: <%= member.total_for_group(@group.id) %>

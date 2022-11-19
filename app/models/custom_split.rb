@@ -1,6 +1,7 @@
 class CustomSplit < ApplicationRecord
 
-  validates :group_id, :total, :group_member_count, presence: true
+  validates :group_id, :total, :group_member_count, :percentage_total, presence: true
+  validates :percentage_total, comparison: { equal_to: 100 }
 
   belongs_to :group
 
