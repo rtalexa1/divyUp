@@ -1,7 +1,3 @@
 <h1>Create a custom split</h1>
 
-<h2><%= @group.name %></h2>
-
-<h4>Percentages must add up to 100</h4>
-
-<%= render 'form', group: @group, action: :new %>
+<%= render 'form', group: @group, balances: @balances, action: :new %>

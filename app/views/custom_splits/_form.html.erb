@@ -1,3 +1,13 @@
+<h2><%= @group.name %></h2>
+
+<h4>Percentages must add up to 100</h4>
+
+<% flash.each do |type, message| %>
+  <div>
+    <%= message %>
+  </div>
+<% end %>
+
 <% if action == :edit %>
   <% action_url = custom_split_url %>
 <% else %>
@@ -15,7 +25,7 @@
   <% end %>
 
   <ul>
-    <% @balances.each do |member, balance| %>
+    <% balances.each do |member, balance| %>
       <li>
         <%= member.name %>
         Amount contributed: <%= member.total_for_group(@group.id) %>

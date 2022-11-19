@@ -14,13 +14,17 @@ class CustomSplitsController < ApplicationController
     render :new
   end
 
-  def create
-    custom_split = CustomSplit.new(custom_split_params)
-    
+  def create 
+    @custom_split = CustomSplit.new(custom_split_params)
+    @balances = CustomSplit.calculate_custom_balances(
+      custom_split_params[:total].to_i, 
+      params[:percentages]
+      )
 
     if custom_split.save
-      redirect_to custom_split_url(custom_split)
+      redirect_to custom_split_url(@custom_split), balances: @balances
     else
+      flash[:error] = @custom_split.errors
       render :new
     end
   end
