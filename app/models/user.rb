@@ -102,6 +102,14 @@ class User < ApplicationRecord
     end
   end
 
+  def is_member?(group_id)
+    Membership.find_by(group_id: group_id, user_id: self.id) ? true : false
+  end
+
+  def is_owner?(group_id)
+    Group.find_by(id: group_id, user_id: self.id) ? true : false
+  end
+
   private
   def ensure_session_token
     self.session_token ||= set_session_token
