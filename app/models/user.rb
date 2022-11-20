@@ -20,7 +20,15 @@ class User < ApplicationRecord
     dependent: :destroy
   has_many :friends, 
     through: :friendships, 
-      source: :user
+    source: :user
+  has_many :sent_invitations,
+    class_name: "Invitation",
+    foreign_key: :sender_id,
+    primary_key: :id
+  has_many :received_invitations,
+    class_name: "Invitation",
+    foreign_key: :recipient_id,
+    primary_key: :id
 
   after_initialize :ensure_session_token
 

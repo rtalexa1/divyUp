@@ -14,6 +14,7 @@ class Group < ApplicationRecord
     through: :memberships,
     source: :user
   has_many :custom_splits
+  has_many :invitations
 
   def total
     self.receipts.sum("total")
