@@ -3,9 +3,9 @@
 <h4>Percentages must add up to 100</h4>
 
 <% if action == :edit %>
-  <% action_url = custom_split_url %>
+  <% action_url = group_custom_split_url(@group) %>
 <% else %>
-  <% action_url = custom_splits_url %>
+  <% action_url = group_custom_splits_url(@group) %>
 <% end %>
 
 <% if flash[:message].present? %>

@@ -9,7 +9,7 @@ class CustomSplitsController < ApplicationController
   end
   
   def new
-    @group = Group.find_by(id: params[:group_id].to_i)
+    @group = Group.find_by(id: params[:group_id])
     @balances = @group.calculate_balances
     render :new
   end
@@ -21,13 +21,14 @@ class CustomSplitsController < ApplicationController
       custom_split_params[:total].to_i, 
       params[:percentages]
       ) 
+    @group = Group.find_by(id: params[:group_id])
     
     if @custom_split.save
       flash[:balances] = @balances
-      redirect_to custom_split_url(@custom_split)
+      redirect_to group_custom_split_url(group_id: @group.id, id: @custom_split.id)
     else
       flash[:message] = @custom_split.errors.full_messages[0]
-      redirect_to controller: 'custom_splits', action: 'new', method: 'get', group_id: @custom_split.group_id
+      redirect_to new_group_custom_split_url(@group)
     end
   end
 

@@ -34,5 +34,6 @@
   <% end %>
 </ul>
 
-<%= button_to "Calculate a custom split", new_custom_split_url, params: {group_id: @group.id}, method: :get%>
+<%= link_to "Calculate a custom split", new_group_custom_split_url(@group) %>
+<br>
 <%= link_to 'Add a new receipt to this group', new_user_receipt_url(@user) %>
