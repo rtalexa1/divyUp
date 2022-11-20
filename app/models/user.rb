@@ -79,6 +79,21 @@ class User < ApplicationRecord
     Friendship.where("user_id = ? OR (friend_id = ? AND accepted = true)", self.id, self.id)
   end
 
+  # Takes in an integer representing a member's contribution from a custom split.
+  # Subtracts that amount from the member's total_for_group
+  # If the balance is negative, returns a string saying how much the member should receive
+  # If the balance is positive, returns a string saying how much the member owes
+  def balance_string(group_id, amount)
+    balance = total_for_group(group_id) - amount
+    if balance == 0
+      return "#{self.name} is settled up."
+    elsif balance < 0
+      return "#{self.name} pays $#{-balance}."
+    else
+      return "#{self.name} is owed $#{balance}."
+    end
+  end
+
   private
   def ensure_session_token
     self.session_token ||= set_session_token

@@ -5,8 +5,8 @@
 <% balances.each do |id, custom_amount| %>
   <ul>
     <% member = User.find_by(id: id.to_i) %>
-    <li><%= member.name %>: <%= custom_amount %></li>
+    <li><%= member.balance_string(params[:group_id], custom_amount) %></li>
   </ul>
 <% end %>
 
-<%= button_to "Try a different split", controller: 'custom_splits', action: 'new', method: 'get' %>
+<%= link_to "Try a different split", new_group_custom_split_url(params[:group_id]) %>
