@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   end
   resources :groups do
     resources :receipts
+    resources :custom_splits
   end
   resource :session, only: [:new, :create, :destroy]
   resources :friendships, only: :update
-  resources :custom_splits
 end
