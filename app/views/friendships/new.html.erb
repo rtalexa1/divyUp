@@ -14,7 +14,7 @@
   <% if @potential_friends %>
     <% @potential_friends.each do |pf| %>
       <li><%= pf.name %></li>
-      <%= button_to "Send friend request", { action: "create", friend_id: pf.id} %>
+      <%= button_to "Send friend request", { action: "create", friend_id: pf.id } %>
     <% end %>
   <% end %>
 </ul>

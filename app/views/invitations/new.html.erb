@@ -1,0 +1,16 @@
+<h1><%= @group.name %></h1>
+
+<h3>Invite a friend to join this group</h3>
+
+<% @friends.each do |friend| %>
+  <ul>
+    <li>
+      <%= friend.name %>
+      <% if friend.is_member?(@group.id) %>
+        (already joined)
+      <% else %>
+        <%= button_to 'Invite', { action: "create", recipient_id: friend.id } %>
+      <% end %>
+    </li>
+  </ul>
+<% end %>
