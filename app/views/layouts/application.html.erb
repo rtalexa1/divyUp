@@ -18,6 +18,8 @@
           <a href="<%=new_user_url%>">Create an account</a>
         <% else %>
           <%= current_user.email %>
+          <br>
+          <%= link_to 'Profile', user_url(current_user) %>
           <form action="<%= session_url %>" method="post">
             <input 
               type="hidden" 

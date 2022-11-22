@@ -4,11 +4,11 @@ class Friendship < ApplicationRecord
 
   belongs_to :user, foreign_key: :friend_id
  
-  after_save do |f|
-    if !Friendship.where("friend_id = ? AND user_id = ?", f.user_id, f.friend_id)
-      Friendship.create(user_id: f.friend_id, friend_id: f.user_id, requester: false)
-    end
-  end
+  # after_create do |f|
+  #   if Friendship.where("friend_id = ? AND user_id = ?", f.user_id, f.friend_id).empty?
+  #     Friendship.create(user_id: f.friend_id, friend_id: f.user_id, requester: false)
+  #   end
+  # end
 
   after_destroy do |f|
     inverse.destroy unless inverse.nil?

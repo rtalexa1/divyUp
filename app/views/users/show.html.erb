@@ -23,6 +23,10 @@
   <%= link_to 'Create a group', new_group_url %><br>
   <%# link_to 'Join an existing group', groups_url %>
 <% end %>
+<%# Would it be better to handle these things through CSS? %>
+<% if @user == current_user %>
+  <h3>Group invites</h3>
+<% end %>
 
 <h2>Friends</h2>
 <ul>
