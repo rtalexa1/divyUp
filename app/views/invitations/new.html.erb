@@ -8,6 +8,8 @@
       <%= friend.name %>
       <% if friend.is_member?(@group.id) %>
         (already joined)
+      <% elsif friend.invite_pending?(@group.id) %>
+        Invite sent
       <% else %>
         <%= button_to 'Invite', { action: "create", recipient_id: friend.id } %>
       <% end %>

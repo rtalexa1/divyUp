@@ -110,6 +110,10 @@ class User < ApplicationRecord
     Group.find_by(id: group_id, user_id: self.id) ? true : false
   end
 
+  def invite_pending?(group_id)
+    Invitation.find_by(group_id: group_id, recipient_id: self.id) ? true : false
+  end
+
   private
   def ensure_session_token
     self.session_token ||= set_session_token

@@ -26,6 +26,21 @@
 <%# Would it be better to handle these things through CSS? %>
 <% if @user == current_user %>
   <h3>Group invites</h3>
+    <ul>
+      <% @user.received_invitations.each do |invite| %>
+        <li>
+          <%= link_to "#{invite.group.name}", group_url(invite.group) %> (Invited by <%= invite.sender.name %>)
+        </li>
+        <form method='post' action="<%= group_invitation_url(invite.group) %>">
+          <div>
+            <input name='_method' value='patch' type='hidden'/>
+            <input name="invitation[accepted]" value="true" type="hidden">
+            <input name="invitation[id]" value="<%= invite.id %>" type="hidden" >
+            <input value='Accept' type='submit'/>
+          </div>
+        </form>
+      <% end %>
+    </ul>  
 <% end %>
 
 <h2>Friends</h2>
