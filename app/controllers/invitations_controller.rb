@@ -23,9 +23,9 @@ class InvitationsController < ApplicationController
 
   def update
     @invitation = Invitation.find(params[:invitation][:id])
-    @invitation.update(accepted: true)
     # If the invite is accepted successfully, create a new membership for the recipient
-
+    @invitation.update(accepted: true)
+    Membership.create(user_id: @invitation.recipient_id, group_id: @invitation.group_id)
     redirect_to user_url(params[:id])
   end
 
