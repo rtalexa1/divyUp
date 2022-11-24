@@ -30,7 +30,8 @@ class InvitationsController < ApplicationController
   end
 
   def destroy
-
+    @invitation = Invitation.find(params[:invitation][:id])
+    @invitation.destroy
   end
 
   private

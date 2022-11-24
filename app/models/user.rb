@@ -117,6 +117,13 @@ class User < ApplicationRecord
   def pending_invitations
     Invitation.find_by(recipient_id: self.id, accepted: false)
   end
+  
+  def friend?(user_id)
+    self.friendships.each do |friendship|
+      return true if friendship.user_id == user_id || friendship.friend_id == user_id
+    end
+    false
+  end
 
   private
   def ensure_session_token
