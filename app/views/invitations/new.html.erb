@@ -1,5 +1,7 @@
 <h1><%= @group.name %></h1>
 
+<%= link_to 'Back', user_url(current_user) %>
+
 <h3>Invite a friend to join this group</h3>
 
 <% @friends.each do |friend| %>

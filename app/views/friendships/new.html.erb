@@ -1,5 +1,7 @@
 <h1>Add friend</h1>
 
+<%= link_to 'Back', user_url(current_user) %>
+
 <%# Make form tags and figure out how to do a search %>
 <form action="<%= new_user_friendship_url %>" method="get">
   <label for="name_search">Search by name</label>
