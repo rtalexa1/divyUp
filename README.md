@@ -1,24 +1,24 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is inspired by [Splitwise](splitwise.com) and is an opportunity for me to practice back-end development in Ruby on Rails as well as HTML and CSS. divyUp allows users to create groups for things like trips or shared apartment expenses, upload receipts, and calculate the dollar amount that each group member owes (or is owed) based on the amount they contributed to the group.  
 
-Things you may want to cover:
+## Features
+In addition to the core feature of tracking group expenses and calculating the shared cost, divyUp supports these features:
+- Friending
+- Secure login
+- Ability to calculate an uneven split based on percentages that the user inputs
 
-* Ruby version
+Additional features that I plan to implement in the future include:
+- Email notifications for friend requests/group invitations
+- An option to allow a group to "settle up"
+- Option to upload a photo of a receipt
 
-* System dependencies
+## Built With
+-Ruby on Rails
+-PostgreSQL
+-HTML
+-CSS
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Contact
+Richard Alexander - rtalexa1@gmail.com
+Project link: https://github.com/rtalexa1/divyUp.git
