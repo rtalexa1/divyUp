@@ -14,10 +14,10 @@ Additional features that I plan to implement in the future include:
 - Option to upload a photo of a receipt
 
 ## Built With
--Ruby on Rails
--PostgreSQL
--HTML
--CSS
+- Ruby on Rails
+- PostgreSQL
+- HTML
+- CSS
 
 ## Contact
 Richard Alexander - rtalexa1@gmail.com
