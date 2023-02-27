@@ -20,6 +20,5 @@ Additional features that I plan to implement in the future include:
 - CSS
 
 ## Contact
-Richard Alexander - rtalexa1@gmail.com
-
+Richard Alexander - rtalexa1@gmail.com 
 Project link: https://github.com/rtalexa1/divyUp.git
